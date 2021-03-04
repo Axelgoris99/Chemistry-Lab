@@ -599,6 +599,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33aa3234397faa044af73f4700427d62, type: 3}
+--- !u!20 &318127463 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5863498845958112903, guid: 1c29527ca57b2924da1260286cd8d6f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 866351923}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &318919992
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +970,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477304, guid: 29f49c4f87606ce47924a910b8793034, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074264572785917036, guid: 29f49c4f87606ce47924a910b8793034,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9338,26 +9349,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 153509557781872335, guid: 29f49c4f87606ce47924a910b8793034,
+    - target: {fileID: 317967274121376393, guid: 29f49c4f87606ce47924a910b8793034,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4914421841746260518, guid: 29f49c4f87606ce47924a910b8793034,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4914421841746260518, guid: 29f49c4f87606ce47924a910b8793034,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 5074264572785917036, guid: 29f49c4f87606ce47924a910b8793034,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 318127463}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29f49c4f87606ce47924a910b8793034, type: 3}
 --- !u!4 &2046645548 stripped
