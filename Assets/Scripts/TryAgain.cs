@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class TryAgain : MonoBehaviour
 {
-   public void restartGame()
+   public void RestartGame()
     {
         SceneManager.LoadScene("laboScene");
         Debug.Log("Hey");
