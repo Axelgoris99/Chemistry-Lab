@@ -15,7 +15,7 @@ public class CountDown : MonoBehaviour
     {
         text = GetComponent<Text>();
         text.text = "\n" + Mathf.Round(timeLeft);
-        time = 100;
+        time = 5;
         timeLeft = time;
     }
 
