@@ -9,6 +9,7 @@ public class CountDown : MonoBehaviour
 
     public static float timeLeft;
     public static float time;
+    AudioSource audioClock;
     Text text;
 
     void Awake()
@@ -17,6 +18,7 @@ public class CountDown : MonoBehaviour
         text.text = "\n" + Mathf.Round(timeLeft);
         time = 100;
         timeLeft = time;
+        audioClock = GameObject.Find("Audio Clock").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -25,7 +27,7 @@ public class CountDown : MonoBehaviour
         if (timeLeft < 0)
         {
             text.text = "\n Time Over !!!";
-
+            audioClock.Stop();
             //Application.LoadLevel("gameOver");
         }
         else
