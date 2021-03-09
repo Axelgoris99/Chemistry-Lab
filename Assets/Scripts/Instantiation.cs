@@ -14,11 +14,9 @@ public class Instantiation : MonoBehaviour {
 	void Update () {
 		if(Vector3.Dot(go.transform.up, Vector3.up) < 0)
         {
-            Debug.Log("Particule Emit !!");
             particles.Emit(1);
         } else
         {
-            Debug.Log("Particule Stop !!");
             //particles.Pause();
             //particles.Clear();
             particles.Stop();

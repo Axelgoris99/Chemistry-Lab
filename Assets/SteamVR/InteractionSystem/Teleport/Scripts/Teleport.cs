@@ -7,13 +7,24 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using Leap.Unity;
 
 namespace Valve.VR.InteractionSystem
 {
 	//-------------------------------------------------------------------------
 	public class Teleport : MonoBehaviour
     {
-        [SteamVR_DefaultAction("Teleport", "default")]
+		public RiggedHand[] hands;
+		enum FingerState {
+			NONE,
+			RELEASED,
+			PRESSED,
+			DOWN
+		};
+		FingerState fingerState = FingerState.NONE;
+
+		//
+		[SteamVR_DefaultAction("Teleport", "default")]
         public SteamVR_Action_Boolean teleportAction;
 
         public LayerMask traceLayerMask;
@@ -234,6 +245,25 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void Update()
 		{
+			// check finger state
+			foreach (RiggedHand h in hands)
+			{
+				Leap.Hand leapHand = h.GetLeapHand();
+				if (leapHand == null) continue;
+				Leap.Finger index = leapHand.GetIndex();
+				Leap.Finger thumb = leapHand.GetThumb();
+				if (index.TipPosition.DistanceTo(thumb.TipPosition) < 0.03)
+				{
+					if (fingerState == FingerState.PRESSED) fingerState = FingerState.DOWN;
+					else if (fingerState != FingerState.DOWN) fingerState = FingerState.PRESSED;
+				} else
+                {
+					if (fingerState == FingerState.RELEASED) fingerState = FingerState.NONE;
+					else if (fingerState != FingerState.NONE) fingerState = FingerState.RELEASED;
+				}
+			}
+
+			//
 			Hand oldPointerHand = pointerHand;
 			Hand newPointerHand = null;
 
@@ -1090,6 +1120,7 @@ namespace Valve.VR.InteractionSystem
 				}
 				else
                 {
+					//return fingerState == FingerState.RELEASED;
                     return teleportAction.GetStateUp(hand.handType);
 
                     //return hand.controller.GetPressUp( SteamVR_Controller.ButtonMask.Touchpad );
@@ -1110,9 +1141,11 @@ namespace Valve.VR.InteractionSystem
 				}
 				else
                 {
-                    return teleportAction.GetState(hand.handType);
+					//return fingerState == FingerState.DOWN;
 
-                    //return hand.controller.GetPress( SteamVR_Controller.ButtonMask.Touchpad );
+					return teleportAction.GetState(hand.handType);
+
+					//return hand.controller.GetPress( SteamVR_Controller.ButtonMask.Touchpad );
 				}
 			}
 
@@ -1131,7 +1164,8 @@ namespace Valve.VR.InteractionSystem
 				}
 				else
                 {
-                    return teleportAction.GetStateDown(hand.handType);
+					//return fingerState == FingerState.PRESSED;
+					return teleportAction.GetStateDown(hand.handType);
 
                     //return hand.controller.GetPressDown( SteamVR_Controller.ButtonMask.Touchpad );
 				}
